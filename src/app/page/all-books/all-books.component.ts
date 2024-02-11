@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 export class AllBooksComponent implements OnInit{
   private http;
   public bookList : any ={};
+  public selectedBook : any;
   constructor(private httpClient : HttpClient){
       this.http = httpClient;
   }
@@ -40,5 +41,16 @@ export class AllBooksComponent implements OnInit{
       }
     });
   }
-  
+
+  setSelectedBook(Book : any){
+    this.selectedBook = Book;
+    console.log(this.selectedBook);
+  }
+  saveBook(){
+    let postApi = "http://localhost:8080/book/add";
+    console.log(this.selectedBook);
+    this.http.post(postApi,this.selectedBook).subscribe((data)=>{
+      // console.log(data);
+    });
+  }
 }
